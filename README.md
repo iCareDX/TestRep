@@ -2,8 +2,8 @@
 ## streamLLM.py
 Streaming出力
 on_llm_new_token関数をオーバーロード
-###時間ごとにチャンクを区切って，それを順次出力
-###文節ごとにチャンクを区切ってやる必要があります．
+### 時間ごとにチャンクを区切って，それを順次出力
+### 文節ごとにチャンクを区切ってやる必要があります．
 
 def on_llm_new_token(self, token: str, **kwargs: any) -> None:
         """Run on new LLM token. Only available when streaming is enabled."""
