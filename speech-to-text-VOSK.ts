@@ -1,10 +1,12 @@
 import * as fs from "fs";
 import * as path from "path";
-#import * as pyaudio from "pyaudio";
-import { Model, KaldiRecognizer } from "vosk";
+//import * as pyaudio from "pyaudio";
+import { Model, Recognizer } from "vosk";
 import { RecordingEmitter } from "./recording-emitter";
 import { Recorder } from "./voice/recorder";
 import { Log } from "~/logger";
+
+//var vosk = require('./vosk.js')
 
 const VOICE_RECORDER_ENERGY_POS = process.env["VOICE_RECORDER_ENERGY_POS"] || "2";
 const VOICE_RECORDER_ENERGY_NEG = process.env["VOICE_RECORDER_ENERGY_NEG"] || "0.5";
@@ -85,8 +87,12 @@ function Speech() {
     let requestOpts = { ...defaultRequestOpts };
 
     // VOSKモデルのロード
-    const model = new Model(path.resolve("vosk-model-small-ja-0.22"));
-    const recognizer = new KaldiRecognizer(model, SAMPLE_RATE_HERTZ);
+
+    const MODEL_PATH = "/home/raspi4wanco99/Downloads/vosk-model-small-ja-0.22"
+    const SAMPLE_RATE = 16000
+
+    const model = new Model(MODEL_PATH);
+    const recognizer = new Recognizer(model, SAMPLE_RATE_HERTZ);
 
     // 認識結果を返す
     const emitResult = (result) => {
